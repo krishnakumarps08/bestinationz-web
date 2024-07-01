@@ -53,7 +53,7 @@ export const SearchBar: React.FC = () => {
     <Container className='p-2 rounded-full bg-black/60'>
       <SearchIcon expanded={expanded} onClick={toggleSearch}  className='text-white '/>
       <SearchInput
-      className='rounded-lg p-[9px] bg-transparent text-white'
+      className='rounded-lg p-3 bg-transparent text-white'
         expanded={expanded}
         type="text"
         placeholder="Search..."
