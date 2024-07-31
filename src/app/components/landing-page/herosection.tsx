@@ -1,28 +1,25 @@
 "use client";
-import { useState, useEffect, useRef } from "react";
-import { Dialog, DialogPanel } from "@headlessui/react";
-import { HiBars3 } from "react-icons/hi2";
-import { MdClose } from "react-icons/md";
-import logo from "@/../../public/logo.png";
-import Backgroundimg from "@/../../public/headingimageone.jpg";
+import backgroundImage from "@/../../public/bestinationz-background.jpg";
 import Image from "next/image";
-import { AboutUs } from "./about";
+import Logo from "@/../../public/logo.png";
+import { BsFillLuggageFill } from "react-icons/bs";
+import { useState, useRef, useEffect } from "react";
+import { BsWhatsapp } from "react-icons/bs";
+import { MdPhone } from "react-icons/md";
 import Link from "next/link";
-import { AboutProperty } from "./aboutproperty";
-import { HeaderCarousel } from "./header-autoscroller";
-import { SearchBar } from "./searchbar";
-import { UserReviews } from "./user-reviews";
-import { Footer } from "./footer";
+import { AboutUs } from "./about";
 const navigation = [
-  { name: "About", href: "#about-section" },
+  // { name: "About", href: "#about-section" },
   { name: "Property", href: "#property" },
-  { name: "Review", href: "#reviews" },
+  // { name: "Review", href: "#reviews" },
   { name: "Gallery", href: "/gallery" },
   { name: "Contact Us", href: "/contactus" },
 ];
 
 export const Herosection = () => {
+  const [mobileMenuOpen, setMobileMenuOpen] = useState(false);
   const [header, setheader] = useState(false);
+
   const aboutUsRef = useRef<HTMLDivElement>(null);
   const propertyRef = useRef<HTMLDivElement>(null);
   const homeRef = useRef<HTMLDivElement>(null);
@@ -35,8 +32,6 @@ export const Herosection = () => {
     }
   };
   useEffect(() => window.addEventListener("scroll", scrollheader), []);
-  const [mobileMenuOpen, setMobileMenuOpen] = useState(false);
-
   const handleNavigationClick = (event: any, href: any) => {
     event.preventDefault();
     if (href === "#about-section" && aboutUsRef.current) {
@@ -51,116 +46,82 @@ export const Herosection = () => {
   };
 
   return (
-    <div>
-      <div className="bg-gray-900/80">
-        <header
-          className={`${
-            header
-              ? "bg-black/80 transition duration-300 "
-              : "bg-transparent transition duration-300"
-          } fixed  inset-x-0 top-0 z-50 `}
-        >
-          <nav
-            className="flex items-center justify-between p-0 lg:px-8"
-            aria-label="Global"
+    <div
+      className="min-h-screen bg-fixed bg-center bg-cover"
+      style={{ backgroundImage: `url(${backgroundImage.src})` }}
+    >
+      <div className="px-4 lg:py-0 py-4 flex flex-row justify-between ">
+        <div className="lg:block hidden">
+          <Image
+            src={Logo}
+            alt="Bestinationz-Logo"
+            width={200}
+            height={200}
+            className="-mt-14 lg:-ml-[20px] "
+          />
+        </div>
+        <div className="flex lg:hidden">
+          <button
+            type="button"
+            onClick={() => setMobileMenuOpen(true)}
+            className=" inline-flex  justify-center rounded-md "
           >
-            <div className="flex lg:flex-1 pt-1">
-              <span className="sr-only">Your Company</span>
-            
-                <Image
-                  className="w-32 -mt-10 cursor-pointer"
-                  src={logo}
-                  alt=""
-                />
-             
-            </div>
-            <div className="flex lg:hidden  ">
-              <button
-                type="button"
-                className="-m-2.5 inline-flex items-center justify-center rounded-md p-2.5 text-gray-400"
-                onClick={() => setMobileMenuOpen(true)}
+            <span className="sr-only">Open main menu</span>
+            <BsFillLuggageFill
+              aria-hidden="true"
+              className="h-8 w-10 text-black hover:text-black/50"
+            />
+          </button>
+        </div>
+        <div>
+          <div className="lg:hidden block">
+            <Image
+              src={Logo}
+              alt="Bestinationz-Logo"
+              width={150}
+              height={150}
+              className="-mt-[72px] "
+            />
+          </div>
+          <div className="lg:flex gap-x-5 lg:-ml-[130px] -ml-0  hidden bg-black/50 px-10 py-5 mt-5 rounded-lg   ">
+            {navigation.map((item) => (
+              <Link
+                key={item.name}
+                href={item.href}
+                onClick={(e) => handleNavigationClick(e, item?.href)}
+                className="text-sm font-semibold leading-6  text-white hover:text-gray400 transition duration-700 ease-in-out"
               >
-                <span className="sr-only">Open main menu</span>
-                {!mobileMenuOpen && (
-                  <HiBars3 className="h-6 w-6" aria-hidden="true" />
-                )}
-              </button>
+                {item.name}
+              </Link>
+            ))}
+          </div>
+        </div>
+        <div>
+          <div className="lg:flex hidden gap-x-4   lg:py-5 mt-5 rounded-lg bg-black/50 px-5  py-0 -ml-[65px] fixed ">
+            <div>
+              <BsWhatsapp className="text-white text-xl cursor-pointer" />
             </div>
-            <div
-              className={`hidden lg:flex lg:gap-x-12  rounded-lg ${
-                header ? "" : "bg-black/60 p-2"
-              }  `}
-            >
-              {navigation.map((item) => (
-                <Link
-                  key={item.name}
-                  href={item.href}
-                  onClick={(e) => handleNavigationClick(e, item?.href)}
-                  className="text-sm font-semibold leading-6 text-white hover:text-gray400 transition duration-700 ease-in-out"
-                >
-                  {item.name}
-                </Link>
-              ))}
+          </div>
+          <div className="lg:hidden flex gap-x-4 rounded-lg bg-black/50 px-5  py-2 ">
+            <div>
+              <BsWhatsapp className="text-white text-xl cursor-pointer" />
             </div>
-            {header ? (
-              <div></div>
-            ) : (
-              <div className="hidden lg:flex lg:flex-1 lg:justify-end">
-                <SearchBar />
-              </div>
-            )}
-          </nav>
-          <Dialog
-            className="lg:hidden"
-            open={mobileMenuOpen}
-            onClose={setMobileMenuOpen}
-          >
-            <div className="fixed inset-0 z-50 " />
-            <DialogPanel className="fixed inset-y-0 right-0 z-50 w-full overflow-y-auto bg-gray-900 px-6 py-6 sm:max-w-sm sm:ring-1 sm:ring-white/10">
-              <div className="flex justify-end">
-                <button
-                  type="button"
-                  className="mt-0 rounded-md text-gray-400"
-                  onClick={() => setMobileMenuOpen(false)}
-                >
-                  <span className="sr-only">Close menu</span>
-                  <MdClose className="h-6 w-6" aria-hidden="true" />
-                </button>
-              </div>
-              <div className="mt-6 flow-root">
-                <div className="-my-6 divide-y divide-gray-500/25">
-                  <div className="space-y-2 py-6">
-                    {navigation.map((item) => (
-                      <a
-                        key={item.name}
-                        href={item.href}
-                        className="-mx-3 block rounded-lg px-3 py-2 text-base font-semibold leading-7 text-white hover:bg-gray-800"
-                      >
-                        {item.name}
-                      </a>
-                    ))}
-                  </div>
-                </div>
-              </div>
-            </DialogPanel>
-          </Dialog>
-        </header>
-        <div className="relative overflow-hidden" ref={homeRef}>
-          <HeaderCarousel />
+            <div>
+              <MdPhone className="text-white text-xl cursor-pointer" />
+            </div>
+          </div>
         </div>
       </div>
-      <div ref={aboutUsRef}>
-        <AboutUs />
+      <div className=" flex md:justify-center justify-start md:px-0 px-5">
+      <Image
+              src={Logo}
+              alt="Bestinationz-Logo"
+              width={400}
+              height={300}
+            />
       </div>
-      <div ref={propertyRef}>
-        <AboutProperty />
-      </div>
-      <div ref={reviewsRef}>
-        <UserReviews />
-      </div>
-      <footer>
-        <Footer/>
-      </footer>
+      
+      <AboutUs/>
     </div>
   );
 };
