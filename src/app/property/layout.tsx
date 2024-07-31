@@ -1,6 +1,5 @@
 import type { Metadata } from "next";
 import { Inter as FontSans } from "next/font/google";
-import { ProperySidebar } from "../components/properties/sidebar";
 const fontsans = FontSans({
     subsets: ["latin"],
     variable: "--font-sans",

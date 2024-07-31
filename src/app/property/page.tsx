@@ -1,7 +1,6 @@
 "use client";
 import { useQuery } from "@tanstack/react-query"
 import { getproperties } from "../api/allproperties/actions";
-import { AllLocations } from "../components/properties/locations";
 const PropertyPage =() =>{
 
     const {data, isLoading} = useQuery({
@@ -19,9 +18,7 @@ const PropertyPage =() =>{
                 <p>Explore our diverse range of resort and hotel locations. Find the perfect destination for your next vacation, whether it&apos;s a beachside resort, a mountain retreat, or a city hotel.</p>
             </div>
             </div>
-            <div>
-                <AllLocations/>
-            </div>
+            
         </div>
     )
 }
