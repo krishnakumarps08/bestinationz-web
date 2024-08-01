@@ -24,17 +24,17 @@ export const AboutUs = () => {
   ];
   return (
     <div>
-      <div className=" w-full h-full items-center py-[20px] flex flex-col gap-20">
+      <div className=" w-full h-full md:items-center  px-5  py-[20px] flex flex-col gap-20">
         <div>
-          <p className=" text-4xl text-white font-bold">
+          <p className=" md:text-4xl text-2xl text-white  font-bold">
             Welcome to Bestinationz
           </p>
         </div>
-        <div className="flex md:flex-row flex-col px-10 sm:gap-y-0 gap-y-3 sm:justify-between gap-x-10  -mt-14">
+        <div className="flex md:flex-row flex-col  sm:gap-y-0 gap-y-3 sm:justify-between gap-x-10  -mt-14">
           {contentdata?.map((items) => (
             <div key={items?.id}>
               <div className="w-full">
-                <p className="text-justify text-base  font-medium text-white">
+                <p className=" text-base  font-medium text-white">
                   {items?.content}
                 </p>
               </div>
