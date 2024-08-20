@@ -8,6 +8,10 @@ import { BsWhatsapp } from "react-icons/bs";
 import { MdPhone } from "react-icons/md";
 import Link from "next/link";
 import { AboutUs } from "./about";
+import { TrendingLocations } from "./trending-locations";
+import { IoMdClose } from "react-icons/io";
+import { UserReviews } from "./user-reviews";
+import { Dialog, DialogPanel } from "@headlessui/react";
 const navigation = [
   // { name: "About", href: "#about-section" },
   { name: "Property", href: "#property" },
@@ -18,32 +22,6 @@ const navigation = [
 
 export const Herosection = () => {
   const [mobileMenuOpen, setMobileMenuOpen] = useState(false);
-  const [header, setheader] = useState(false);
-
-  const aboutUsRef = useRef<HTMLDivElement>(null);
-  const propertyRef = useRef<HTMLDivElement>(null);
-  const homeRef = useRef<HTMLDivElement>(null);
-  const reviewsRef = useRef<HTMLDivElement>(null);
-  const scrollheader = () => {
-    if (window.scrollY >= 20) {
-      setheader(true);
-    } else {
-      setheader(false);
-    }
-  };
-  useEffect(() => window.addEventListener("scroll", scrollheader), []);
-  const handleNavigationClick = (event: any, href: any) => {
-    event.preventDefault();
-    if (href === "#about-section" && aboutUsRef.current) {
-      aboutUsRef.current.scrollIntoView({ behavior: "smooth" });
-    }
-    if (href === "#property" && propertyRef.current) {
-      propertyRef.current.scrollIntoView({ behavior: "smooth" });
-    }
-    if (href === "#reviews" && reviewsRef.current) {
-      reviewsRef.current.scrollIntoView({ behavior: "smooth" });
-    }
-  };
 
   return (
     <div
@@ -57,7 +35,7 @@ export const Herosection = () => {
             alt="Bestinationz-Logo"
             width={200}
             height={200}
-            className="-mt-14 lg:-ml-[20px] "
+            className="-mt-16 lg:-ml-[20px] "
           />
         </div>
         <div className="flex lg:hidden">
@@ -74,7 +52,7 @@ export const Herosection = () => {
           </button>
         </div>
         <div>
-          <div className="lg:hidden block">
+          {/* <div className="lg:hidden block">
             <Image
               src={Logo}
               alt="Bestinationz-Logo"
@@ -82,13 +60,12 @@ export const Herosection = () => {
               height={150}
               className="-mt-[72px] "
             />
-          </div>
+          </div> */}
           <div className="lg:flex gap-x-5 lg:-ml-[130px] -ml-0  hidden bg-black/50 px-10 py-5 mt-5 rounded-lg   ">
             {navigation.map((item) => (
               <Link
                 key={item.name}
                 href={item.href}
-                onClick={(e) => handleNavigationClick(e, item?.href)}
                 className="text-sm font-semibold leading-6  text-white hover:text-gray400 transition duration-700 ease-in-out"
               >
                 {item.name}
@@ -112,16 +89,60 @@ export const Herosection = () => {
           </div>
         </div>
       </div>
-      <div className=" flex md:justify-center justify-start md:px-0 px-5">
-      <Image
-              src={Logo}
-              alt="Bestinationz-Logo"
-              width={400}
-              height={300}
-            />
+      <div>
+        <Dialog
+          open={mobileMenuOpen}
+          onClose={setMobileMenuOpen}
+          className="lg:hidden"
+        >
+          <div className="fixed inset-0 z-50" />
+          <DialogPanel className="fixed inset-y-0 right-0 z-50 w-full overflow-y-auto bg-gray-900 px-6 py-6 sm:max-w-sm sm:ring-1 sm:ring-white/10">
+            <div className="flex items-center justify-between">
+              <a href="#" className="-m-1.5 p-1.5">
+                <span className="sr-only">Your Company</span>
+              </a>
+              <button
+                type="button"
+                onClick={() => setMobileMenuOpen(false)}
+                className="-m-2.5 rounded-md p-2.5 text-gray-400"
+              >
+                <span className="sr-only">Close menu</span>
+                <IoMdClose aria-hidden="true" className="h-6 w-6" />
+              </button>
+            </div>
+            <div className="mt-6 flow-root">
+              <div className="-my-6 divide-y divide-gray-500/25">
+                <div className="space-y-2 py-6">
+                  {navigation.map((item) => (
+                    <a
+                      key={item.name}
+                      href={item.href}
+                      className="-mx-3 block rounded-lg px-3 py-2 text-base font-semibold leading-7 text-white hover:bg-gray-800"
+                    >
+                      {item.name}
+                    </a>
+                  ))}
+                </div>
+                <div className="py-6">
+                  <a
+                    href="#"
+                    className="-mx-3 block rounded-lg px-3 py-2.5 text-base font-semibold leading-7 text-white hover:bg-gray-800"
+                  >
+                    Log in
+                  </a>
+                </div>
+              </div>
+            </div>
+          </DialogPanel>
+        </Dialog>
       </div>
-      
-      <AboutUs/>
+      <div className=" flex md:justify-center justify-start md:px-0 px-5">
+        <Image src={Logo} alt="Bestinationz-Logo" width={400} height={300} />
+      </div>
+
+      <AboutUs />
+      <TrendingLocations />
+      <UserReviews/>
     </div>
   );
 };

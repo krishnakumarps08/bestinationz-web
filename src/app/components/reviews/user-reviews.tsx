@@ -42,21 +42,26 @@ export const ReviewCarosel = () => {
         pauseOnHover={true}
       >
         <div className="gap-x-5 ml-5 flex flex-row">
-        {ReviewsData?.map((items) =>(
-            <Card key={items?.id} >
-                <div className="flex flex-row justify-between">
-                    <div>
-                        <p className="text-2xl font-medium">{items?.name}</p>
-                    </div>
-                    <div>
-                    <RiDoubleQuotesR className="text-2xl" />
-                    </div>
+          {ReviewsData?.map((items) => (
+            <Card key={items?.id} className="bg-transparent">
+              <div className="flex flex-row justify-between">
+                <div>
+                  <p className="text-2xl font-medium text-white">
+                    {items?.name}
+                  </p>
                 </div>
-                <div className="w-[350px] pt-10">
-                   <p className="text-start text-lg fonr"> {items?.review}</p>
-                    </div>
+                <div>
+                  <RiDoubleQuotesR className="text-2xl " />
+                </div>
+              </div>
+              <div className="w-[350px] pt-10">
+                <p className="text-start text-lg text-white">
+                  {" "}
+                  {items?.review}
+                </p>
+              </div>
             </Card>
-        ))}
+          ))}
         </div>
       </Marquee>
     </div>

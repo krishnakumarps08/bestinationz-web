@@ -33,8 +33,8 @@ export const AboutUs = () => {
         <div className="flex md:flex-row flex-col  sm:gap-y-0 gap-y-3 sm:justify-between gap-x-10  -mt-14">
           {contentdata?.map((items) => (
             <div key={items?.id}>
-              <div className="w-full">
-                <p className=" text-base  font-medium text-white">
+              <div className="w-full md:px-3 px-0">
+                <p className=" text-base text-justify   font-medium text-white">
                   {items?.content}
                 </p>
               </div>
